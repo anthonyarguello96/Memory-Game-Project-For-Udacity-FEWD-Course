@@ -107,3 +107,10 @@ h1 {
     float: right;
     cursor: pointer;
 }
+.no-click {
+    pointer-events: none;
+}
+.hide{
+  visibility: hidden;
+  display: none;;
+}

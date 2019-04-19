@@ -1,14 +1,19 @@
 /*
  * Create a list that holds all of your cards
  */
+let cardsArray =['fa-diamond', 'fa-diamond',
+                'fa-paper-plane-o','fa-paper-plane-o',
+                'fa-anchor','fa-anchor',
+                'fa-bolt','fa-bolt',
+                'fa-cube','fa-cube',
+                'fa-leaf','fa-leaf',
+                'fa-bicycle','fa-bicycle',
+                'fa-bomb','fa-bomb'];
 
 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
+function createCard(anyCard){
+  return `<li class="card"><i class="fa ${anyCard}"></i></li>`;
+}
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -26,6 +31,22 @@ function shuffle(array) {
 }
 
 
+function createDeckOfCards (){
+  let deck= document.querySelector('.deck');
+  let cardHTML= shuffle(cardsArray).map(function(cardFromArray){
+  return createCard(cardFromArray)
+  });
+  deck.innerHTML = cardHTML.join('');
+}
+
+createDeckOfCards();
+
+
+//Global scope variables
+let cards= document.querySelectorAll('.card');
+let openCards=[];
+let movesCount=0;
+
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -36,3 +57,78 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+// function to keep a count
+function count(){
+  movesCount+=1;
+  const movesHTML= document.querySelector('.moves');
+  movesHTML.innerHTML = movesCount;
+}
+
+
+//Event listener, an d inside it checking for match, with will triger either to flip the cards or apply
+//to be display as match.
+
+ for(let card of cards){
+   card.addEventListener('click', function(e){
+
+     if(openCards.length<2){
+       //card.classList.add('open', 'show');
+       card.className= 'card open show';
+       openCards.push(card);
+       this.style.pointerEvents="none";
+       console.log(openCards);
+     }
+
+     if(openCards.length===2 && openCards[0].firstElementChild.className===openCards[1].firstElementChild.className){
+       count();
+       checkCount();
+       openCards[0].className= 'card open match';
+       openCards[1].className= 'card open match';
+       openCards=[];
+     }else if(openCards.length===2 && openCards[0].firstElementChild.className!==openCards[1].firstElementChild.className){
+         card.classList.add('.no-click');
+               count();
+               checkCount();
+         setTimeout(function hide( ){
+         openCards[0].className= 'card';
+         openCards[1].className= 'card';
+         openCards[0].style.pointerEvents="auto";
+         openCards[1].style.pointerEvents="auto";
+         openCards=[];
+
+
+     }, 2000);
+
+     }
+   });
+ }
+
+   //Restart Buttom
+   const restart= document.querySelector('.restart');
+   restart.addEventListener('click', function(e){
+     for(let card of cards){
+       card.className= 'card';
+       card.style.pointerEvents= "auto";
+       movesCount=0;
+     }
+   });
+
+   //hide stars (does not work)
+   function checkCount(){
+     if(movesCount ===3 || movesCount ===10){
+       hideStars();
+     }
+   }
+
+    const starsHTML= document.querySelectorAll('.stars li');
+    function hideStars(){
+        for(let star of starsHTML){
+         console.log(star);
+         star.classList.add('.hide');
+         //}
+       }
+      }
+
+
+       //starsHTML.innerHTML= '<li><i class="fa fa-star"></i></li>, <li><i class="fa fa-star"></i></li>';
