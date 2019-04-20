@@ -43,6 +43,7 @@ createDeckOfCards();
 
 
 //Global scope variables
+const movesHTML= document.querySelector('.moves');
 let cards= document.querySelectorAll('.card');
 let openCards=[];
 let movesCount=0;
@@ -61,7 +62,6 @@ let movesCount=0;
 // function to keep a count
 function count(){
   movesCount+=1;
-  const movesHTML= document.querySelector('.moves');
   movesHTML.innerHTML = movesCount;
 }
 
@@ -81,21 +81,28 @@ function count(){
      }
 
      if(openCards.length===2 && openCards[0].firstElementChild.className===openCards[1].firstElementChild.className){
+  //calling count() function to add a number to count
        count();
+ //calling checkCount() to fire hideStars() function
        checkCount();
        openCards[0].className= 'card open match';
        openCards[1].className= 'card open match';
        openCards=[];
      }else if(openCards.length===2 && openCards[0].firstElementChild.className!==openCards[1].firstElementChild.className){
          card.classList.add('.no-click');
+//calling count() function to add a number to count
                count();
+ //calling checkCount() to fire hideStars() function
                checkCount();
+        let deck= document.querySelector('.deck');
+        deck.style.pointerEvents="none";
          setTimeout(function hide( ){
          openCards[0].className= 'card';
          openCards[1].className= 'card';
          openCards[0].style.pointerEvents="auto";
          openCards[1].style.pointerEvents="auto";
          openCards=[];
+         deck.style.pointerEvents="auto";
 
 
      }, 2000);
@@ -111,12 +118,16 @@ function count(){
        card.className= 'card';
        card.style.pointerEvents= "auto";
        movesCount=0;
+       movesHTML.innerHTML= '0';
+       for(let star of starsHTML){
+        star.classList.remove('hide');
+        }
      }
    });
 
    //hide stars (does not work)
    function checkCount(){
-     if(movesCount ===3 || movesCount ===10){
+     if(movesCount ===3 || movesCount ===6 || movesCount===9){
        hideStars();
      }
    }
@@ -124,9 +135,10 @@ function count(){
     const starsHTML= document.querySelectorAll('.stars li');
     function hideStars(){
         for(let star of starsHTML){
-         console.log(star);
-         star.classList.add('.hide');
-         //}
+         if(star.className!== 'hide'){
+         star.classList.add('hide');
+         break;
+         }
        }
       }
 
