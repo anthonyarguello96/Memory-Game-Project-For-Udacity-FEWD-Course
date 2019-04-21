@@ -112,5 +112,60 @@ h1 {
 }
 .hide{
   visibility: hidden;
-  display: none;;
+  display: none;
+}
+.mondalBackground{
+  position: absolute;
+  top: 0;
+  left:0;
+  height: 100%;
+  width: 100%;
+  background: white;
+}
+
+.mondalContent{
+  position: relaive;
+  width: 600px;
+  height:300px;
+  top: 50%;
+  left: 50%;
+  background:rgb(170, 252, 255);
+  transform: translate(32%,85%);
+}
+
+.mondalHeading{
+  width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding:26px;
+  border-bottom: 1px solid white;
+  background:white;
+}
+
+.modal_close{
+  font-weight: bolder;
+  font-size: 28px;
+}
+
+.mondalStats{
+  display: flex;
+  justify-content: space-between;
+  flex-flow: column;
+  align-items: center;
+  padding:26px;
+
+}
+
+.replayButton{
+  width: 60px;
+  height: 30px;
+  background-color: lightgrey;
+}
+
+.mondalButtons{
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around;
+  pading: 24px;
 }
