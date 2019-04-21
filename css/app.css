@@ -16,10 +16,12 @@ body {
     padding: 0;
 }
 
+
 body {
     background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
     font-family: 'Coda', cursive;
 }
+
 
 .container {
     display: flex;
@@ -28,10 +30,12 @@ body {
     flex-direction: column;
 }
 
+
 h1 {
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
 }
+
 
 /*
  * Styles for the deck of cards
@@ -51,6 +55,8 @@ h1 {
     margin: 0 0 3em;
 }
 
+
+
 .deck .card {
     height: 125px;
     width: 125px;
@@ -65,21 +71,29 @@ h1 {
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
 }
 
+
+
 .deck .card.open {
     transform: rotateY(0);
     background: #02b3e4;
     cursor: default;
 }
 
+
+
 .deck .card.show {
     font-size: 33px;
 }
+
+
 
 .deck .card.match {
     cursor: default;
     background: #02ccba;
     font-size: 33px;
 }
+
+
 
 /*
  * Styles for the Score Panel
@@ -91,6 +105,8 @@ h1 {
     margin-bottom: 10px;
 }
 
+
+
 .score-panel .stars {
     margin: 0;
     padding: 0;
@@ -98,22 +114,32 @@ h1 {
     margin: 0 5px 0 0;
 }
 
+
+
 .score-panel .stars li {
     list-style: none;
     display: inline-block;
 }
 
+
+
 .score-panel .restart {
     float: right;
     cursor: pointer;
 }
+
+
 .no-click {
     pointer-events: none;
 }
+
+
 .hide{
   visibility: hidden;
   display: none;
 }
+
+
 .mondalBackground{
   position: absolute;
   top: 0;
@@ -122,6 +148,8 @@ h1 {
   width: 100%;
   background: white;
 }
+
+
 
 .mondalContent{
   position: relaive;
@@ -133,6 +161,8 @@ h1 {
   transform: translate(32%,85%);
 }
 
+
+
 .mondalHeading{
   width: 600px;
   display: flex;
@@ -143,10 +173,14 @@ h1 {
   background:white;
 }
 
+
+
 .modal_close{
   font-weight: bolder;
   font-size: 28px;
 }
+
+
 
 .mondalStats{
   display: flex;
@@ -157,11 +191,15 @@ h1 {
 
 }
 
+
+
 .replayButton{
   width: 60px;
   height: 30px;
   background-color: lightgrey;
 }
+
+
 
 .mondalButtons{
   display: flex;

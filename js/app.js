@@ -28,16 +28,6 @@ function shuffle(array) {
     return array;
 }
 
-//generating the deck of cards
-function createDeckOfCards (){
-  let deck= document.querySelector('.deck');
-  let cardHTML= shuffle(cardsArray).map(function(cardFromArray){
-  return createCard(cardFromArray)
-  });
-  deck.innerHTML = cardHTML.join('');
-}
-
-createDeckOfCards();
 
 
 //Global scope variables
@@ -68,7 +58,7 @@ let matchedCards=[];
          minutes++;
        }
 
-   //This block of code will add a leadig zero while second or minutes are
+   //This block of code will add a leading zero while second or minutes are
    //less than 10.
 
      if(seconds<10){
@@ -94,22 +84,23 @@ let matchedCards=[];
        }
      }
 
-  //this  function stops the timer
+  //this function stops the timer
      function stop(){
        window.clearInterval(interval);
        status="stopped";
 
      }
- //this  function resets the timer
+ //this function resets the timer
      function resetStopWatch(){
        window.clearInterval(interval);
        seconds=0;
        minutes=0;
+       status = 'stopped';
        document.getElementById('display_timer').innerHTML="00:00";
      }
 
 
-// function to keep a count of the mnoves
+// function to keep a count of the moves
 function count(){
   movesCount+=1;
   movesHTML.innerHTML = movesCount;
@@ -118,6 +109,8 @@ function count(){
 
 //Event listener, which through a "for of loop" will be checking for matches.
 //Once found the mathcing cards, the style changes will be apply.
+function addAllEventListener(){
+  cards= document.querySelectorAll('.card');
  for(let card of cards){
    card.addEventListener('click', function(e){
 //calling the timer starter function
@@ -155,10 +148,21 @@ function count(){
          openCards[1].style.pointerEvents="auto";
          openCards=[];
          deck.style.pointerEvents="auto";
-     }, 2000);
+     }, 1100);
     }
    });
  }
+}
+//generating the deck of cards
+function createDeckOfCards (){
+  let deck= document.querySelector('.deck');
+  let cardHTML= shuffle(cardsArray).map(function(cardFromArray){
+  return createCard(cardFromArray)
+  });
+  deck.innerHTML = cardHTML.join('');
+  addAllEventListener();
+}
+ createDeckOfCards();
 
    //Restart Buttom for the score panel
 
@@ -166,7 +170,7 @@ function count(){
      for(let card of cards){
        card.className= 'card';
        card.style.pointerEvents= "auto";
-        //createDeckOfCards();
+        createDeckOfCards();
      }
 
      for(let star of starsHTML){
@@ -181,7 +185,10 @@ function count(){
    restart.addEventListener('click', function(e){
      restartButton();
    });
-let starCount=3;
+
+
+
+   let starCount=3;
    //hide stars
    function checkCount(){
      if(movesCount ===15 || movesCount ===20 || movesCount===25){
